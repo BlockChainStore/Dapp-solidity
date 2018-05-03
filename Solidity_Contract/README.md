@@ -10,6 +10,8 @@ struct Asset
 struct User
 	- address wallet
 	- uint balance
+
+
 ---
 
 
