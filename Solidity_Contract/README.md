@@ -1,12 +1,11 @@
-**STRUCT**
+##**STRUCT**
 
 struct Asset
-    * uint _id
-    * string name
-    * address  idOwner
-    * uint price
- * หฟกฟห
- * sadas
+ * uint _id
+ * string name
+ * address  idOwner
+ * uint price
+
 
 struct User
 	- address wallet
@@ -16,7 +15,7 @@ struct User
 ---
 
 
-**FUNCTION**
+##**FUNCTION**
 
 buy(uint _idAssest,uint _price) 
 	- parameter
@@ -62,7 +61,7 @@ getUserVote(address _userAddress)
 
 ---
 
-**MAPPING (HASH TABLE)**
+##**MAPPING (HASH TABLE)**
 
 userItemsIds (KEY => address ,VALUE => uint[])
 	- address user to product that he owns
