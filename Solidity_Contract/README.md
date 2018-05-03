@@ -1,10 +1,10 @@
 **STRUCT**
 
 struct Asset
-    - uint _id
-    - string name
-    - address  idOwner
-    - uint price
+    * uint _id
+    * string name
+    * address  idOwner
+    * uint price
 
 
 struct User
