@@ -10,9 +10,7 @@ struct User
  - address wallet
  - uint balance
 
-
 ---
-
 
 ## **FUNCTION**
 
@@ -61,15 +59,6 @@ getUserVote(address _userAddress)
 ---
 
 ## **MAPPING (HASH TABLE)**
-
-userItemsIds (KEY => address ,VALUE => uint[])
- - address user to product that he owns
-itemIdToUser (KEY => uint ,VALUE => address)
- - uint id product to owner
-rate (KEY => address ,VALUE => address[])
- - address rater to list all he rate
-countRate (KEY => address ,VALUE => uint)
- - address user to uint rateCount
 
 | MAPPING | KEY | VALUE| DESCRIPTION |
 |:-------:|:---:|:----:|:-----------:|
