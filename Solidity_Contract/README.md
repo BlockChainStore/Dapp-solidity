@@ -8,9 +8,9 @@ struct Asset
 
 
 struct User
-	-address wallet
-	-uint balance
-
+	- address wallet
+	- uint balance
+---
 
 
 **FUNCTION**
@@ -57,7 +57,7 @@ getUserVote(address _userAddress)
 	- description
 		- display address whose _userAddress rated.
 
-
+---
 
 **MAPPING (HASH TABLE)**
 
