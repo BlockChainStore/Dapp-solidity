@@ -70,3 +70,10 @@ rate (KEY => address ,VALUE => address[])
  - address rater to list all he rate
 countRate (KEY => address ,VALUE => uint)
  - address user to uint rateCount
+
+| MAPPING | KEY | VALUE| DESCRIPTION |
+|:-------:|:---:|:----:|:-----------:|
+|userItemsIds|address|uint[]|address user to product that he owns|
+|itemIdToUser|uint|address|uint id product to owner|
+|rate|address|address[]|address rater to list all he rate|
+|countRate|address|uint|address user to uint rateCount|
