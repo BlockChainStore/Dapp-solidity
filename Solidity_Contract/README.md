@@ -56,6 +56,10 @@ getUserVote(address _userAddress)
 	- description
 		- display address whose _userAddress rated.
 
+|FUNCTION|PARAMETER|DESCRIPTION|
+|:------:|:-------:|:---------:|
+|buy|||
+
 ---
 
 ## **MAPPING (HASH TABLE)**
