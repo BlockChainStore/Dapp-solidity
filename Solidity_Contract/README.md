@@ -1,4 +1,4 @@
-STRUCT
+**STRUCT**
 
 struct Asset
 	-uint _id
@@ -13,7 +13,7 @@ struct User
 
 
 
-FUNCTION
+**FUNCTION**
 
 buy(uint _idAssest,uint _price) 
 	-parameter
@@ -59,7 +59,7 @@ getUserVote(address _userAddress)
 
 
 
-MAPPING (HASH TABLE)
+**MAPPING (HASH TABLE)**
 
 userItemsIds (KEY => address ,VALUE => uint[])
 	-address user to product that he owns
