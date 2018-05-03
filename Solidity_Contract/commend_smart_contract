@@ -1,3 +1,18 @@
+STRUCT
+
+struct Asset
+	-uint _id
+	-string name
+	-address  idOwner
+	-uint price
+
+
+struct User
+	-address wallet
+	-uint balance
+
+
+
 FUNCTION
 
 buy(uint _idAssest,uint _price) 
