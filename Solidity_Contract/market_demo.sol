@@ -21,13 +21,14 @@ contract market{
     struct User{
         address wallet;
         uint balance;
-     
     }
     User[] public users;
     
     mapping (address => uint[]) public userItemsIds;
     mapping (uint => address) public itemIdToUser;
-    
+    mapping (address => address[]) public rate;
+    mapping (address => uint) public countRate;
+    mapping (uint => address) public user;
     
     function buy (uint _idAssest,uint _price){
        //1. check assets that have?
@@ -91,6 +92,26 @@ contract market{
     function getItemInfo(uint _itemId) public view returns (string nameOfItem, address _idOwner, uint price) {
         Asset memory item = assets[_itemId];
         return ( item.name, item.idOwner, item.price);
+    }
+    function changePrice(uint _idAssest,uint _newprice){
+        require(assets[_idAssest].idOwner==msg.sender);
+        assets[_idAssest].price=_newprice;
+    }
+    function rating(address seller){
+        bool canRate = true;
+        address[] memory temp=rate[msg.sender];
+        for(uint i =0 ;i<temp.length;i++){
+            if(temp[i]==seller){
+                canRate=false;
+                break;
+            }
+        }
+        require(canRate);
+        rate[msg.sender].push(seller);
+        countRate[seller]++;
+    }
+        function getUserVote(address _userAddress) public view returns (address[] voted){
+        return rate[_userAddress];
     }
 
 }
