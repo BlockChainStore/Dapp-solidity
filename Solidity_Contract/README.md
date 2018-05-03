@@ -5,7 +5,8 @@ struct Asset
     * string name
     * address  idOwner
     * uint price
-
+ * หฟกฟห
+ * sadas
 
 struct User
 	- address wallet
