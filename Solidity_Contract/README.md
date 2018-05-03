@@ -6,10 +6,9 @@ struct Asset
  * address  idOwner
  * uint price
 
-
 struct User
-	- address wallet
-	- uint balance
+ - address wallet
+ - uint balance
 
 
 ---
@@ -64,10 +63,10 @@ getUserVote(address _userAddress)
 ## **MAPPING (HASH TABLE)**
 
 userItemsIds (KEY => address ,VALUE => uint[])
-	- address user to product that he owns
+ - address user to product that he owns
 itemIdToUser (KEY => uint ,VALUE => address)
-	- uint id product to owner
+ - uint id product to owner
 rate (KEY => address ,VALUE => address[])
-	- address rater to list all he rate
+ - address rater to list all he rate
 countRate (KEY => address ,VALUE => uint)
-	- address user to uint rateCount
+ - address user to uint rateCount
