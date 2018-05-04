@@ -93,9 +93,9 @@ contract market{
         Asset memory item = assets[_itemId];
         return ( item.name, item.idOwner, item.price);
     }
-    function changePrice(uint _idAssest,uint _newprice){
+    function changePrice(uint _idAssest,uint _newPrice){
         require(assets[_idAssest].idOwner==msg.sender);
-        assets[_idAssest].price=_newprice;
+        assets[_idAssest].price=_newPrice;
     }
     function rating(address seller){
         bool canRate = true;
