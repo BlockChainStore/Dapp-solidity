@@ -58,7 +58,7 @@ getUserVote(address _userAddress)
 
 |FUNCTION|PARAMETER|DESCRIPTION|
 |:------:|:-------:|:---------:|
-|buy|||
+|buy|<ul><li>item1</li><li>item2</li></ul>||
 
 ---
 
