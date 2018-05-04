@@ -13,7 +13,7 @@ contract market{
         string name;
         address  idOwner;
         uint price;
-        //bool bought;
+        bool forSale;
         // string description;
     }
     Asset[] public assets;
@@ -28,7 +28,7 @@ contract market{
     mapping (uint => address) public itemIdToUser;
     mapping (address => address[]) public rate;
     mapping (address => uint) public countRate;
-    mapping (uint => address) public user;
+    //mapping (uint => address) public user;
     
     function buy (uint _idAssest,uint _price){
        //1. check assets that have?
@@ -67,13 +67,14 @@ contract market{
      
       
        assets[_idAssest].idOwner=msg.sender; 
+       assets[_idAssest].forSale=false;
        //change owner
        userItemsIds[msg.sender].push(_idAssest);
        
        
     }
     function createAsset(string _name,uint _price) payable {
-        assets.push(Asset(idAssest,_name, msg.sender,_price));
+        assets.push(Asset(idAssest,_name, msg.sender,_price,true));
         itemIdToUser[idAssest] = msg.sender;
         userItemsIds[msg.sender].push(idAssest);
         idAssest++;
@@ -97,21 +98,25 @@ contract market{
         require(assets[_idAssest].idOwner==msg.sender);
         assets[_idAssest].price=_newPrice;
     }
-    function rating(address seller){
+    function rating(address _seller){
         bool canRate = true;
         address[] memory temp=rate[msg.sender];
         for(uint i =0 ;i<temp.length;i++){
-            if(temp[i]==seller){
+            if(temp[i]==_seller){
                 canRate=false;
                 break;
             }
         }
         require(canRate);
-        rate[msg.sender].push(seller);
-        countRate[seller]++;
+        rate[msg.sender].push(_seller);
+        countRate[_seller]++;
     }
-        function getUserVote(address _userAddress) public view returns (address[] voted){
+    function getUserVote(address _userAddress) public view returns (address[] voted){
         return rate[_userAddress];
     }
-
+    function setToSale(uint _idAssest,uint _price){
+        require(msg.sender==assets[idAssest].idOwner);
+        assets[_idAssest].forSale=true;
+        assets[_idAssest].price=_price;
+    }
 }
