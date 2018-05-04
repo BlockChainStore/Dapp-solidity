@@ -1,12 +1,12 @@
 ## **STRUCT**
 
-struct Asset
+#### Asset
  * uint _id
  * string name
  * address  idOwner
  * uint price
 
-struct User
+#### User
  - address wallet
  - uint balance
 
