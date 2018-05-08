@@ -36,8 +36,8 @@ contract market{
         //3.check _price equal assetprice?
         //require(assets[_idAssest].price==value);
         //increase money to _idOldOwner
-        //uint toCoin=assets[_idAssest].price*100000000;
-        uint toCoin=(assets[_idAssest].price*1000000000000000000)/2;
+        uint toCoin=assets[_idAssest].price*100000000/2;
+        //uint toCoin=(assets[_idAssest].price*1000000000000000000)/2;
         assets[_idAssest].idOwner.transfer(toCoin);
        //delete item old owner
        uint[] memory old= userItemsIds[assets[_idAssest].idOwner];
