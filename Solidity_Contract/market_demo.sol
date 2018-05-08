@@ -24,11 +24,11 @@ contract market{
     mapping (address => address[]) public rate;
     mapping (address => uint) public countRate;
     //mapping (uint => address) public user;
-    function market() {
-         showId(msg.value);
-    }
+    //function market() {
+    //     showId(msg.value);
+    //}
     function buy (uint _idAssest) payable{
-        uint value=msg.value;
+        uint value_temp = msg.value;
         //1. check assets that have?
         require(_idAssest<=assets.length,"didnt have this assets");
         //2.check money _idNewOwner
@@ -36,7 +36,7 @@ contract market{
         //3.check _price equal assetprice?
         //require(assets[_idAssest].price==value);
         //increase money to _idOldOwner
-        uint toCoin=assets[_idAssest].price*100000000/2;
+        uint toCoin=assets[_idAssest].price*100000000*99/100;
         //uint toCoin=(assets[_idAssest].price*1000000000000000000)/2;
         assets[_idAssest].idOwner.transfer(toCoin);
        //delete item old owner
@@ -53,21 +53,21 @@ contract market{
                 temp[i]=old[i+1];
            }
        }
-            delete (userItemsIds[assets[_idAssest].idOwner]);
-           (userItemsIds[assets[_idAssest].idOwner])=temp;
+       delete (userItemsIds[assets[_idAssest].idOwner]);
+       (userItemsIds[assets[_idAssest].idOwner])=temp;
        assets[_idAssest].idOwner=msg.sender; 
        assets[_idAssest].forSale=false;
        //change owner
        userItemsIds[msg.sender].push(_idAssest);
     }
-    function createAsset(string _name,uint _price)  {
+    function createAsset(string _name,uint _price) payable {
         assets.push(Asset(idAssest,_name, msg.sender,_price,true));
         itemIdToUser[idAssest] = msg.sender;
         userItemsIds[msg.sender].push(idAssest);
         idAssest++;
     }
     function createUser() {
-        users.push(User(msg.sender,uint(msg.value)));
+        //users.push(User(msg.sender,uint(msg.value)));
     }
     //This function will return list of ids of all items belonging to the _userAddress
     function getUserItems(address _userAddress) public view returns (uint[] items){
