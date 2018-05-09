@@ -1,5 +1,5 @@
 //Demo not finished
-
+//
 pragma solidity^0.4.18;
 
 contract BCS {

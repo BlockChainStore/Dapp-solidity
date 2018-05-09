@@ -17,7 +17,7 @@
 
 |FUNCTION|PARAMETER|DESCRIPTION|
 |---|---|---|
-|buy(uint _idAssest,uint _price) |<ul><li>_idAssest is ID product that you want to buy</li><li>_price is confirm that you know what cost</li></ul>|buy product by change ownership|
+|buy(uint _idAssest) |<ul><li>_idAssest is ID product that you want to buy</li></ul>|buy product by change ownership|
 |createAsset(string _name,uint _price)|<ul><li>_name is name's product</li><li>_price set price</li></ul>|create product that you want to sell|
 |createUser()|-|create user|
 |getUserItems(address _userAddress)|<ul><li>_userAddress is address that you want to know what he owns</li></ul>|display all item that he owns|
