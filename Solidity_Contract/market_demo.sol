@@ -1,5 +1,4 @@
 pragma solidity ^0.4.22;
-dsafnsadf
 contract market{
     event listAssets(string name,uint  idOwner);
     event listUser(string name,address wallet);
