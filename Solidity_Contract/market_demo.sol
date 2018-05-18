@@ -103,7 +103,4 @@ contract market{
         assets[_idAssest].forSale=true;
         assets[_idAssest].price=_price;
     }
-    function test(uint amount){
-        msg.sender.transfer(amount);
-    }
 }
