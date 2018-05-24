@@ -1,0 +1,17 @@
+send to contract
+	buy = d96a094a   (uint256 _idAsset)
+	changePrice = b3de019c (uint256 _idAsset, uint256 _newPrice)
+	createAsset = db9cc410 (string _name , uint256 _price)
+	rating = 5b550faa (address _seller)
+	setToSale = 71fde3b2 (uint256 _idAsset, uint256 _price)
+sendtocontract "7e6f72756dc3bad13f824f0187e29d124c967ec6" "29ad91ce" 12.0015 6000000 0.0000004 
+
+call contract
+	assets = cf35bdd0 (uint256) 
+	countRate = 50fc3255 (address)
+	getItemInfo = de7fe3e7  (uint256)
+	getUserItems = ce6019b4 (address)
+	getUserVote = d4923d4e (address)
+	itemIdToUser = 563ce86c (uint256)
+	rate = b624633c (address , uint256)
+	userItemIds = 96f380a4 (address, uint256)
