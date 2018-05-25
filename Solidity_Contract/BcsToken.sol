@@ -8,7 +8,6 @@ contract BcsToken is IERC20{
     
     string public constant symbol= "BCS";
     string public constant name ="BCS Token";
-    uint8 public constant decimals=3;
     
     mapping(address => uint256) balances;
     mapping(address => mapping(address =>uint256)) allowed;
