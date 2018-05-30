@@ -25,16 +25,11 @@ contract TokenERC20 {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
-    function TokenERC20(
-        
-        uint256 initialSupply,
-        string tokenName,
-        string tokenSymbol
-    ) public {
-        totalSupply = initialSupply * (10 ** uint256(decimals));  // Update total supply with the decimal amount
+    function TokenERC20() public {
+        totalSupply = 100000000 * (10 ** uint256(decimals));  // Update total supply with the decimal amount
         balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens
-        name = tokenName;                                   // Set the name for display purposes
-        symbol = tokenSymbol;                               // Set the symbol for display purposes
+        name = "BCS Token";                                   // Set the name for display purposes
+        symbol = "BCS";                               // Set the symbol for display purposes
         owner=msg.sender;
     }
 
@@ -58,7 +53,6 @@ contract TokenERC20 {
         // Asserts are used to use static analysis to find bugs in your code. They should never fail
         assert(balanceOf[_from] + balanceOf[_to] == previousBalances);
     }
-
     /**
      * Transfer tokens
      *
@@ -70,7 +64,6 @@ contract TokenERC20 {
     function transfer(address _to, uint256 _value) public {
         _transfer(msg.sender, _to, _value);
     }
-
     /**
      * Transfer tokens from other address
      *
@@ -86,7 +79,6 @@ contract TokenERC20 {
         _transfer(_from, _to, _value);
         return true;
     }
-
     /**
      * Set allowance for other address
      *
@@ -100,21 +92,20 @@ contract TokenERC20 {
         allowance[msg.sender][_spender] = _value;
         return true;
     }
-
     /**
      * Destroy tokens
      *
      * Remove `_value` tokens from the system irreversibly
      *
-     * @param _value the amount of money to burn
      */
-    function burn(uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value);   // Check if the sender has enough
+    function burn() public returns (bool success) {
+        
+       // require(balanceOf[msg.sender] >= _value);   // Check if the sender has enough
         require(owner==msg.sender);                 // Check owner only can destroy
-        balanceOf[msg.sender] -= _value;            // Subtract from the sender
-        totalSupply -= _value;                      // Updates totalSupply
-        emit Burn(msg.sender, _value);
+        uint256 temp = balanceOf[msg.sender];
+        balanceOf[msg.sender] = 0;            // Subtract from the sender
+        totalSupply -= temp ;                    // Updates totalSupply
+        emit Burn(msg.sender, temp);
         return true;
     }
-
 }
