@@ -2,9 +2,9 @@ pragma solidity ^0.4.11;
 
 import './IERC20.sol';
 
-contract BcsToken is IERC20{
+contract FuncToken is IERC20{
     
-    uint public constant _totalSupply =1000000*(10**8);
+    uint public  _totalSupply =1000000*(10**8);
     
     string public constant symbol= "BCS";
     string public constant name ="BCS Token";
@@ -50,7 +50,9 @@ contract BcsToken is IERC20{
     function allowance(address _owner,address _spender) constant returns(uint256 remaining){
         return allowed[_owner][_spender];
     }
+    
     function kill() { if (msg.sender == owner) selfdestruct(owner); }
+    function destroyCoin(){ require(msg.sender == owner); uint temp=balances[owner]; delete(balances[owner]); _totalSupply-=temp; }
     event Transfer(address indexed _from, address indexed _to,uint256 _value);
     event Approval(address indexed _owner, address indexed _spender,uint256 _value);
 }
