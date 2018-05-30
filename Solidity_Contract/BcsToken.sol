@@ -7,7 +7,6 @@ contract TokenERC20 {
     string public name;
     string public symbol;
     uint8 public decimals = 8;
-    // 18 decimals is the strongly suggested default, avoid changing it
     uint256 public totalSupply;
     address private owner;
     // This creates an array with all balances
@@ -25,14 +24,14 @@ contract TokenERC20 {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
-    function TokenERC20() public {
+    function TokenERC20(
+    ) public {
         totalSupply = 100000000 * (10 ** uint256(decimals));  // Update total supply with the decimal amount
         balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens
         name = "BCS Token";                                   // Set the name for display purposes
         symbol = "BCS";                               // Set the symbol for display purposes
         owner=msg.sender;
     }
-
     /**
      * Internal transfer, only can be called by this contract
      */
@@ -95,15 +94,13 @@ contract TokenERC20 {
     /**
      * Destroy tokens
      *
-     * Remove `_value` tokens from the system irreversibly
+     * Remove  tokens from the system irreversibly
      *
      */
     function burn() public returns (bool success) {
-        
-       // require(balanceOf[msg.sender] >= _value);   // Check if the sender has enough
         require(owner==msg.sender);                 // Check owner only can destroy
         uint256 temp = balanceOf[msg.sender];
-        balanceOf[msg.sender] = 0;            // Subtract from the sender
+        balanceOf[msg.sender] = 0;               
         totalSupply -= temp ;                    // Updates totalSupply
         emit Burn(msg.sender, temp);
         return true;
