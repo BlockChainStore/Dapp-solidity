@@ -1,13 +1,37 @@
-pragma solidity ^0.4.16;
+pragma solidity ^0.4.23;
+
+// SafeMath for addition and substraction
+library SafeMath {
+
+  /**
+  * @dev Adds two numbers, throws on overflow.
+  */
+    function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+    c = a + b;
+    assert(c >= a);
+    return c;
+    }
+
+/**
+  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+  */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b <= a);
+    return a - b;
+    }
+  
+}
+
 
 interface tokenRecipient { function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) external; }
 
-contract TokenERC20 {
+contract BCSToken {
+    // Use SafeMath library for addition and substraction
+    using SafeMath for uint;
     // Public variables of the token
     string public name;
     string public symbol;
     uint256 public decimals = 8;
-    // 18 decimals is the strongly suggested default, avoid changing it
     uint256 public totalSupply;
     address private owner;
     // This creates an array with all balances
@@ -25,16 +49,13 @@ contract TokenERC20 {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
-    constructor(
-        string tokenName,
-        string tokenSymbol
-    ) public {
-        uint256 initialSupply=100000000 ;                           // 100M
-        totalSupply = initialSupply * (10 ** uint256(decimals));  // Update total supply with the decimal amount
-        balanceOf[msg.sender] = totalSupply;                // Give the creator all initial tokens
-        name = tokenName;                                   // Set the name for display purposes
-        symbol = tokenSymbol;                               // Set the symbol for display purposes
-        owner=msg.sender;
+    constructor() public {
+    	name = "BCS Token";                                     // Set the name for display purposes
+        symbol = "BCS";                                         // and symbol
+    	uint256 initialSupply = 100000000;			            // 100M	tokens
+        totalSupply = initialSupply * (10 ** uint256(decimals));// 8 digits for mantissa , no safeMath needed here
+        balanceOf[msg.sender] = totalSupply;                    // Give the creator all initial tokens
+        owner = msg.sender;
     }
 
     /**
@@ -46,16 +67,16 @@ contract TokenERC20 {
         // Check if the sender has enough
         require(balanceOf[_from] >= _value);
         // Check for overflows
-        require(balanceOf[_to] + _value >= balanceOf[_to]);
+        require(SafeMath.add(balanceOf[_to] ,_value) >= balanceOf[_to]);
         // Save this for an assertion in the future
-        uint previousBalances = balanceOf[_from] + balanceOf[_to];
+        uint previousBalances = SafeMath.add(balanceOf[_from] , balanceOf[_to]);
         // Subtract from the sender
-        balanceOf[_from] -= _value;
+        balanceOf[_from]=SafeMath.sub(balanceOf[_from] , _value);
         // Add the same to the recipient
-        balanceOf[_to] += _value;
+        balanceOf[_to]=SafeMath.add(balanceOf[_from] , _value);
         emit Transfer(_from, _to, _value);
         // Asserts are used to use static analysis to find bugs in your code. They should never fail
-        assert(balanceOf[_from] + balanceOf[_to] == previousBalances);
+        assert(SafeMath.add(balanceOf[_from] , balanceOf[_to]) == previousBalances);
     }
 
     /**
@@ -81,7 +102,7 @@ contract TokenERC20 {
      */
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         require(_value <= allowance[_from][msg.sender]);     // Check allowance
-        allowance[_from][msg.sender] -= _value;
+        allowance[_from][msg.sender]=SafeMath.sub(allowance[_from][msg.sender] , _value);
         _transfer(_from, _to, _value);
         return true;
     }
@@ -108,10 +129,10 @@ contract TokenERC20 {
      * @param _value the amount of money to burn
      */
     function burn(uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value);   // Check if the sender has enough
-        require(owner==msg.sender);                 // Check owner only can destroy
-        balanceOf[msg.sender] -= _value;            // Subtract from the sender
-        totalSupply -= _value;                      // Updates totalSupply
+        require(balanceOf[msg.sender] >= _value);                          // Check if the sender has enough
+        require(owner==msg.sender);                                        // Check owner only can destroy
+        balanceOf[msg.sender]=SafeMath.sub(balanceOf[msg.sender],_value);  // Subtract from the sender
+        totalSupply = SafeMath.sub(totalSupply , _value);                  // Updates totalSupply
         emit Burn(msg.sender, _value);
         return true;
     }
