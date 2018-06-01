@@ -73,7 +73,7 @@ contract BCSToken {
         // Subtract from the sender
         balanceOf[_from]=SafeMath.sub(balanceOf[_from] , _value);
         // Add the same to the recipient
-        balanceOf[_to]=SafeMath.add(balanceOf[_from] , _value);
+        balanceOf[_to]=SafeMath.add(balanceOf[_to] , _value);
         emit Transfer(_from, _to, _value);
         // Asserts are used to use static analysis to find bugs in your code. They should never fail
         assert(SafeMath.add(balanceOf[_from] , balanceOf[_to]) == previousBalances);
