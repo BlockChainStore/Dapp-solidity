@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.4.18;
 
 // SafeMath for addition and substraction
 library SafeMath {
@@ -49,7 +49,7 @@ contract BCSToken {
      *
      * Initializes contract with initial supply tokens to the creator of the contract
      */
-    constructor() public {
+    function BCSToken() public {
     	name = "BCS Token";                                     // Set the name for display purposes
         symbol = "BCS";                                         // and symbol
     	uint256 initialSupply = 100000000;			            // 100M	tokens
